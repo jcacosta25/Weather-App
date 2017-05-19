@@ -10,6 +10,7 @@ import com.juancacosta.kotlinweather.R.id
 import com.juancacosta.kotlinweather.R.layout
 import com.juancacosta.kotlinweather.data.ForecastRequest
 import com.juancacosta.kotlinweather.domain.commands.RequestForecastCommand
+import com.juancacosta.kotlinweather.domain.model.Forecast
 import com.juancacosta.kotlinweather.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.custom.async
 import org.jetbrains.anko.doAsync
@@ -65,7 +66,12 @@ class MainActivity : AppCompatActivity() {
         doAsync {
             val result = RequestForecastCommand("66220").execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result)
+                //forecastList.adapter = ForecastListAdapter(result)
+                forecastList.adapter = ForecastListAdapter(result, object:ForecastListAdapter.OnItemClickListener {
+                    override fun invoke(forecast: Forecast) {
+                        niceToast(forecast.date)
+                    }
+                })
             }
         }
 
