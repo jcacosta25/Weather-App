@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.juancacosta.kotlinweather.R.id
 import com.juancacosta.kotlinweather.R.layout
 import com.juancacosta.kotlinweather.data.ForecastRequest
+import com.juancacosta.kotlinweather.domain.commands.RequestForecastCommand
 import com.juancacosta.kotlinweather.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.custom.async
 import org.jetbrains.anko.doAsync
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         val  forecastList = findViewById(id.forecast_list) as RecyclerView
         forecastList.layoutManager = LinearLayoutManager(this)
-        forecastList.adapter = ForecastListAdapter(items)
+        //forecastList.adapter = ForecastListAdapter(items)
 
 
         /*val url = "http://api.openweathermap.org/data/2.5/forecast/daily?" +
@@ -60,6 +61,14 @@ class MainActivity : AppCompatActivity() {
         val date = f1.component1()
         val temperature = f1.component2()
         val details = f1.component3()*/
+
+        doAsync {
+            val result = RequestForecastCommand("66220").execute()
+            uiThread {
+                forecastList.adapter = ForecastListAdapter(result)
+            }
+        }
+
 
     }
     // function with Method Toast
