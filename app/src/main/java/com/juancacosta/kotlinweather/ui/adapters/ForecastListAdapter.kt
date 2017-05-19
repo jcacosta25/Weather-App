@@ -37,6 +37,8 @@ import org.jetbrains.anko.find
 class ForecastListAdapter(val items: ForecastList, val itemClick: OnItemClickListener)
     : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         //return ViewHolder(TextView(parent?.context))
         val view = LayoutInflater.from(parent?.ctx)
