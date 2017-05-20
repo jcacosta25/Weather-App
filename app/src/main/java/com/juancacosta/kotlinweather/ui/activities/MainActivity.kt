@@ -66,12 +66,18 @@ class MainActivity : AppCompatActivity() {
         doAsync {
             val result = RequestForecastCommand("66220").execute()
             uiThread {
-                //forecastList.adapter = ForecastListAdapter(result)
-                forecastList.adapter = ForecastListAdapter(result, object:ForecastListAdapter.OnItemClickListener {
+                // Simple Text Request
+                // forecastList.adapter = ForecastListAdapter(result)
+                // REQUEST WITH CUSTOM
+                /*forecastList.adapter = ForecastListAdapter(result, object:ForecastListAdapter.OnItemClickListener {
                     override fun invoke(forecast: Forecast) {
                         niceToast(forecast.date)
                     }
-                })
+                })*/
+
+                // Long Lambda
+                //forecastList.adapter = ForecastListAdapter(result){forecast -> toast(forecast.date)}
+                forecastList.adapter = ForecastListAdapter(result){toast(it.date)}
             }
         }
 
