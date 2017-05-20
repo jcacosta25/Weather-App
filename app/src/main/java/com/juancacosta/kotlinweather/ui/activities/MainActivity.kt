@@ -7,18 +7,19 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.juancacosta.kotlinweather.R
 import com.juancacosta.kotlinweather.domain.commands.RequestForecastCommand
 import com.juancacosta.kotlinweather.ui.adapters.ForecastListAdapter
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         forecastList.layoutManager = LinearLayoutManager(this)
-
         doAsync {
             val result = RequestForecastCommand("66220").execute()
             uiThread {
@@ -28,8 +29,8 @@ class MainActivity : AppCompatActivity() {
 
         supportsLollipop { window.statusBarColor(Color.BLACK) }
 
-
     }
+
     fun Context.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT){
         Toast.makeText(this,message,duration).show()
     }
