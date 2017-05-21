@@ -1,7 +1,7 @@
 package com.juancacosta.kotlinweather.domain.commands
 
 import com.juancacosta.kotlinweather.data.server.ForecastRequest
-import com.juancacosta.kotlinweather.domain.mappers.ForecastDataMapper
+import com.juancacosta.kotlinweather.data.server.ServerDataMapper
 import com.juancacosta.kotlinweather.domain.model.ForecastList
 
 /**
@@ -9,8 +9,13 @@ import com.juancacosta.kotlinweather.domain.model.ForecastList
  *
  */
 class RequestForecastCommand(private val zipCode: Long): Command<ForecastList>{
+
+    companion object {
+        val DAYS = 7
+    }
+
     override fun execute(): ForecastList {
         val forecastRequest = ForecastRequest(zipCode)
-        return ForecastDataMapper().convertFromDataModel(zipCode,forecastRequest.execute())
+        return ServerDataMapper().convertFromDataModel(zipCode,forecastRequest.execute())
     }
 }

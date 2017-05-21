@@ -1,10 +1,8 @@
-package com.juancacosta.kotlinweather.domain.mappers
+package com.juancacosta.kotlinweather.data.server
 
-import com.juancacosta.kotlinweather.data.server.Forecast
-import com.juancacosta.kotlinweather.data.server.ForecastResult
 import com.juancacosta.kotlinweather.domain.model.ForecastList
 import java.util.Calendar
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeUnit.DAYS
 import com.juancacosta.kotlinweather.domain.model.Forecast as ModelForecast
 
 
@@ -12,21 +10,21 @@ import com.juancacosta.kotlinweather.domain.model.Forecast as ModelForecast
  * Created by Juan C. Acosta on 5/19/2017.
  *
  */
-class ForecastDataMapper {
+class ServerDataMapper {
 
-    fun convertFromDataModel(zipCode:Long,forecast: ForecastResult) = with(forecast) {
-        ForecastList(zipCode,city.name,city.country,convertForecastListToDomain(list))
+    fun convertToDomain(zipCode: Long, forecast: ForecastResult) = with(forecast) {
+        ForecastList(zipCode, city.name, city.country, convertForecastListToDomain(list))
     }
 
-    private fun convertForecastListToDomain(list: List<Forecast>): List<ModelForecast> {
+    private fun convertForecastListToDomain(list: List<Forecast>): List<com.juancacosta.kotlinweather.domain.model.Forecast> {
         return list.mapIndexed { i, forecast ->
-            val dt = Calendar.getInstance().timeInMillis + TimeUnit.DAYS.toMillis(i.toLong())
+            val dt = Calendar.getInstance().timeInMillis + DAYS.toMillis(i.toLong())
             convertForecastItemToDomain(forecast.copy(dt = dt))
         }
     }
 
     private fun convertForecastItemToDomain(forecast: Forecast) = with(forecast) {
-        ModelForecast(dt, forecast.weather[0].description,
+        com.juancacosta.kotlinweather.domain.model.Forecast(dt, forecast.weather[0].description,
                 forecast.temp.max.toInt(), forecast.temp.min.toInt(),
                 generateIconUrl(forecast.weather[0].icon))
     }
