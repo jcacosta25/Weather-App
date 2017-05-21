@@ -1,5 +1,6 @@
 package com.juancacosta.kotlinweather.data.db
 
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.juancacosta.kotlinweather.ui.App
 import org.jetbrains.anko.db.AUTOINCREMENT
@@ -14,7 +15,7 @@ import org.jetbrains.anko.db.dropTable
  * Created by jcacosta on 5/19/17.
  *
  */
-class ForecastDbHelper(): ManagedSQLiteOpenHelper(App.instance,ForecastDbHelper.DB_NAME, null,ForecastDbHelper.DB_VERSION){
+class ForecastDbHelper(ctx: Context = App.instance): ManagedSQLiteOpenHelper(ctx,ForecastDbHelper.DB_NAME, null,ForecastDbHelper.DB_VERSION){
     companion object{
         val DB_NAME = "forecast.db"
         val DB_VERSION = 1

@@ -1,4 +1,4 @@
-package com.juancacosta.kotlinweather.ui.utils
+package com.juancacosta.kotlinweather.extensions
 
 import android.content.Context
 import android.view.View

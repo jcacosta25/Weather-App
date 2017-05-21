@@ -4,14 +4,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.juancacosta.kotlinweather.R
 import com.juancacosta.kotlinweather.domain.model.Forecast
 import com.juancacosta.kotlinweather.domain.model.ForecastList
-import com.juancacosta.kotlinweather.ui.utils.ctx
+import com.juancacosta.kotlinweather.extensions.ctx
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.find
 import kotlinx.android.synthetic.main.item_forecast.view.*
 
 /**
@@ -43,8 +40,8 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
                 Picasso.with(itemView.ctx).load(iconURL).into(itemView.icon)
                 itemView.date.text = date
                 itemView.description.text = description
-                itemView.maxTemperature.text = "$high"
-                itemView.minTemperature.text = "$low"
+                itemView.maxTemperature.text = "${high}º"
+                itemView.minTemperature.text = "${low}º"
                 itemView.setOnClickListener { itemClick(this) }
             }
         }

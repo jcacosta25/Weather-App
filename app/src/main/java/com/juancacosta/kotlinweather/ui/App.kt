@@ -2,7 +2,7 @@ package com.juancacosta.kotlinweather.ui
 
 import android.app.Application
 import com.juancacosta.kotlinweather.ui.utils.Delegate
-import com.juancacosta.kotlinweather.ui.utils.DelegatesExt
+import com.juancacosta.kotlinweather.extensions.DelegatesExt
 
 /**
  * Created by jcacosta on 5/19/17.
