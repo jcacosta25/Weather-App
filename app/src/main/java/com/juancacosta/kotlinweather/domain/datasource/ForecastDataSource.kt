@@ -1,5 +1,7 @@
 package com.juancacosta.kotlinweather.domain.datasource
 
+
+import com.juancacosta.kotlinweather.domain.model.Forecast
 import com.juancacosta.kotlinweather.domain.model.ForecastList
 
 /**
@@ -8,4 +10,6 @@ import com.juancacosta.kotlinweather.domain.model.ForecastList
  */
 interface ForecastDataSource {
     fun requestForecastByZipCode(zipCode: Long, date: Long): ForecastList?
+
+    fun requestDayForecast(id: Long): Forecast?
 }

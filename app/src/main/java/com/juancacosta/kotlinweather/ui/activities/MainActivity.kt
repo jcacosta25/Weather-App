@@ -13,6 +13,7 @@ import com.juancacosta.kotlinweather.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,13 +22,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         forecastList.layoutManager = LinearLayoutManager(this)
         doAsync {
-            val result = RequestForecastCommand("66220").execute()
+            val result = RequestForecastCommand(66220).execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result){toast(it.date)}
+                forecastList.adapter = ForecastListAdapter(result){
+                    startActivity<DetailActivity>(DetailActivity.ID to it.id,
+                            DetailActivity.CITY_NAME to result.city)
+                }
             }
         }
 
-        supportsLollipop { window.statusBarColor(Color.BLACK) }
+        //supportsLollipop { window.statusBarColor(Color.BLACK) }
 
     }
 
@@ -43,4 +47,3 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-private operator fun  Int.invoke(black: Int) {}

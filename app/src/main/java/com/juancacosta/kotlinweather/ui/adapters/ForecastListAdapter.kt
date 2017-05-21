@@ -8,6 +8,7 @@ import com.juancacosta.kotlinweather.R
 import com.juancacosta.kotlinweather.domain.model.Forecast
 import com.juancacosta.kotlinweather.domain.model.ForecastList
 import com.juancacosta.kotlinweather.extensions.ctx
+import com.juancacosta.kotlinweather.extensions.toDateString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
 
@@ -37,8 +38,8 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
 
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
-                Picasso.with(itemView.ctx).load(iconURL).into(itemView.icon)
-                itemView.date.text = date
+                Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
+                itemView.date.text = date.toDateString()
                 itemView.description.text = description
                 itemView.maxTemperature.text = "${high}º"
                 itemView.minTemperature.text = "${low}º"
